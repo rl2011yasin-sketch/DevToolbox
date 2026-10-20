@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DevToolbox — Visual Studio Code</title>
+  <meta name="description" content="DevToolbox — a VS Code-themed developer toolbox. 8 essential tools, 100% client-side." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧰</text></svg>" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<div class="vscode">
+
+  <!-- ══ TITLE BAR ══ -->
+  <div class="title-bar">
+    <div class="title-left">
+      <div class="title-logo">🧰 DevToolbox</div>
+      <div class="menu-items">
+        <span>File</span><span>Edit</span><span>Selection</span><span>View</span>
+        <span>Go</span><span>Run</span><span>Terminal</span><span>Help</span>
+      </div>
+    </div>
+    <div class="title-center" id="titleCenter">Welcome — DevToolbox</div>
+    <div class="title-right">
+      <button class="wc-btn" title="Minimize">─</button>
+      <button class="wc-btn" title="Maximize">□</button>
+      <button class="wc-btn close" title="Close">✕</button>
+    </div>
+  </div>
+
+  <!-- ══ BODY ══ -->
+  <div class="body">
+
+    <!-- Activity Bar -->
+    <div class="activity-bar">
+      <button class="activity-icon active" data-panel="explorer" title="Explorer">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 7l3-3h5l2 2h8v14H3z"/></svg>
+      </button>
+      <button class="activity-icon" data-panel="search" title="Search">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+      </button>
+      <button class="activity-icon" data-panel="source" title="Source Control">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="6" cy="6" r="2"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="12" r="2"/><path d="M6 8v8M8 6h6a4 4 0 014 4"/></svg>
+      </button>
+      <button class="activity-icon" data-panel="debug" title="Run and Debug">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.4"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      </button>
+      <button class="activity-icon" data-panel="extensions" title="Extensions">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      </button>
+      <div class="activity-bottom">
+        <button class="activity-icon" data-panel="settings" title="Settings">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09a1.65 1.65 0 00-1-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09a1.65 1.65 0 001.51-1 1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33h.09a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82v.09a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Side Bar -->
+    <div class="side-bar" id="sideBar">
+      <div class="side-bar-header" id="sideBarHeader">EXPLORER</div>
+      <div class="side-bar-body">
+        <div class="folder-header">
+          <span class="chevron">▾</span>
+          <span class="folder-name">DEVTOOLBOX</span>
+          <span class="folder-actions">＋ ⟳</span>
+        </div>
+        <div class="file-tree" id="fileTree"></div>
+      </div>
+    </div>
+
+    <!-- Workbench -->
+    <div class="workbench">
+      <div class="editor-area">
+        <div class="tabs" id="tabs"></div>
+        <div class="breadcrumbs" id="breadcrumbs"></div>
+        <div class="editor-body">
+          <div class="editor-content" id="editorContent"></div>
+          <div class="minimap" id="minimap">
+            <div class="minimap-lines"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel" id="panel">
+        <div class="panel-header">
+          <div class="panel-tabs">
+            <span class="panel-tab active">TERMINAL</span>
+            <span class="panel-tab">PROBLEMS</span>
+            <span class="panel-tab">OUTPUT</span>
+            <span class="panel-tab">DEBUG CONSOLE</span>
+          </div>
+          <div class="panel-actions">
+            <button class="panel-btn" id="panelKill" title="Kill Terminal">🗑</button>
+            <button class="panel-btn" id="panelClose" title="Close Panel">✕</button>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="terminal" id="terminal"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ STATUS BAR ══ -->
+  <div class="status-bar">
+    <div class="status-left">
+      <button class="status-item">🔀 main*</button>
+      <button class="status-item">⊗ 0  ⚠ 0</button>
+    </div>
+    <div class="status-center" id="statusCenter"></div>
+    <div class="status-right">
+      <span class="status-item" id="statusCursor">Ln 1, Col 1</span>
+      <span class="status-item">Spaces: 2</span>
+      <span class="status-item">UTF-8</span>
+      <span class="status-item">LF</span>
+      <span class="status-item" id="statusLang">JavaScript</span>
+      <button class="status-item theme-btn" id="themeBtn">🌙 Dark+</button>
+      <span class="status-item">🔔</span>
+    </div>
+  </div>
+</div>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
