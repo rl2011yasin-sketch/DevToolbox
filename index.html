@@ -5,10 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DevToolbox — Visual Studio Code</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧰</text></svg>" />
-  <link rel="stylesheet" href="css/style.css" />
-
-  <!-- QR library (UMD — works with file:// too) -->
-  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+  <link rel="stylesheet" href="css/style.css?v=3" />
 </head>
 <body>
 <div class="vscode">
@@ -103,6 +100,7 @@
     </div>
     <div class="status-center" id="statusCenter"></div>
     <div class="status-right">
+      <span class="status-item" id="jsStatus" style="background:#c53636;color:white;font-weight:bold">JS: ...</span>
       <span class="status-item" id="statusCursor">Ln 1, Col 1</span>
       <span class="status-item">Spaces: 2</span>
       <span class="status-item">UTF-8</span>
@@ -114,16 +112,39 @@
   </div>
 </div>
 
-<!-- ─── PLAIN SCRIPTS — NO ES MODULES — WORKS EVERYWHERE ─── -->
-<script src="js/utils.js"></script>
-<script src="js/tools/password.js"></script>
-<script src="js/tools/qr.js"></script>
-<script src="js/tools/color.js"></script>
-<script src="js/tools/text.js"></script>
-<script src="js/tools/json.js"></script>
-<script src="js/tools/base64.js"></script>
-<script src="js/tools/hash.js"></script>
-<script src="js/tools/units.js"></script>
-<script src="js/app.js"></script>
+<!--
+  ⚠️ CRITICAL: NO CDN SCRIPTS HERE.
+  All scripts use `defer` so they don't block HTML parsing.
+  QR library loads lazily inside qr.js only when needed.
+  ?v=3 avoids GitHub Pages cache issues.
+-->
+<script src="js/utils.js?v=3" defer></script>
+<script src="js/tools/password.js?v=3" defer></script>
+<script src="js/tools/qr.js?v=3" defer></script>
+<script src="js/tools/color.js?v=3" defer></script>
+<script src="js/tools/text.js?v=3" defer></script>
+<script src="js/tools/json.js?v=3" defer></script>
+<script src="js/tools/base64.js?v=3" defer></script>
+<script src="js/tools/hash.js?v=3" defer></script>
+<script src="js/tools/units.js?v=3" defer></script>
+<script src="js/app.js?v=3" defer></script>
+
+<!-- JS health check — no modules, runs after all deferred scripts -->
+<script>
+  window.addEventListener('load', function () {
+    var el = document.getElementById('jsStatus');
+    if (!el) return;
+    if (window.DT && window.DT.tools && Object.keys(window.DT.tools).length > 0) {
+      el.textContent = 'JS: ✓ OK';
+      el.style.background = '#10b981';
+    } else {
+      el.textContent = 'JS: ✗ FAILED';
+      el.style.background = '#c53636';
+      setTimeout(function () {
+        alert('JavaScript failed to load!\n\nOpen F12 → Console and check for red errors.\n\nMost common cause: wrong file path or files not uploaded.');
+      }, 500);
+    }
+  });
+</script>
 </body>
 </html>
