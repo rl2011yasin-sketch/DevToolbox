@@ -4,14 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DevToolbox — Visual Studio Code</title>
-  <meta name="description" content="DevToolbox — a VS Code-themed developer toolbox. 8 essential tools, 100% client-side." />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧰</text></svg>" />
   <link rel="stylesheet" href="css/style.css" />
+
+  <!-- QR library (UMD — works with file:// too) -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
 </head>
 <body>
 <div class="vscode">
-
-  <!-- ══ TITLE BAR ══ -->
   <div class="title-bar">
     <div class="title-left">
       <div class="title-logo">🧰 DevToolbox</div>
@@ -28,10 +28,7 @@
     </div>
   </div>
 
-  <!-- ══ BODY ══ -->
   <div class="body">
-
-    <!-- Activity Bar -->
     <div class="activity-bar">
       <button class="activity-icon active" data-panel="explorer" title="Explorer">
         <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 7l3-3h5l2 2h8v14H3z"/></svg>
@@ -55,8 +52,7 @@
       </div>
     </div>
 
-    <!-- Side Bar -->
-    <div class="side-bar" id="sideBar">
+    <div class="side-bar">
       <div class="side-bar-header" id="sideBarHeader">EXPLORER</div>
       <div class="side-bar-body">
         <div class="folder-header">
@@ -68,14 +64,13 @@
       </div>
     </div>
 
-    <!-- Workbench -->
     <div class="workbench">
       <div class="editor-area">
         <div class="tabs" id="tabs"></div>
         <div class="breadcrumbs" id="breadcrumbs"></div>
         <div class="editor-body">
           <div class="editor-content" id="editorContent"></div>
-          <div class="minimap" id="minimap">
+          <div class="minimap">
             <div class="minimap-lines"></div>
           </div>
         </div>
@@ -101,7 +96,6 @@
     </div>
   </div>
 
-  <!-- ══ STATUS BAR ══ -->
   <div class="status-bar">
     <div class="status-left">
       <button class="status-item">🔀 main*</button>
@@ -119,6 +113,17 @@
     </div>
   </div>
 </div>
-<script type="module" src="js/app.js"></script>
+
+<!-- ─── PLAIN SCRIPTS — NO ES MODULES — WORKS EVERYWHERE ─── -->
+<script src="js/utils.js"></script>
+<script src="js/tools/password.js"></script>
+<script src="js/tools/qr.js"></script>
+<script src="js/tools/color.js"></script>
+<script src="js/tools/text.js"></script>
+<script src="js/tools/json.js"></script>
+<script src="js/tools/base64.js"></script>
+<script src="js/tools/hash.js"></script>
+<script src="js/tools/units.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>
